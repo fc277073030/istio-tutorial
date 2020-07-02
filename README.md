@@ -15,8 +15,7 @@ Istio 从逻辑上可以分为数据平面和控制平面：
 * **控制平面** 负责管理和配置代理来路由流量，并配置 Mixer 以进行策略部署和遥测数据收集
 
 Istio 架构如图：
-![ac7b55982e28d7bebaa1aadc098c2a6c.png](evernotecid://481E08E3-B0BC-4AF0-BD1D-F5A91D581CF3/appyinxiangcom/15709100/ENResource/p947)
-
+![avatar](img/istio-arch.png)
 它主要由以下组件构成：
 
 * Envoy：Lyft 开源的高性能代理，用于调解服务网格中所有服务的入站和出站流量。它支持动态服务发现、负载均衡、TLS 终止、HTTP/2 和 gPRC 代理、熔断、健康检查、故障注入和性能测量等丰富的功能。Envoy 以 sidecar 的方式部署在相关的服务的 Pod 中，从而无需重新构建或重写代码。
@@ -25,8 +24,7 @@ Istio 架构如图：
 * Pilot 为 Envoy sidecar 提供服务发现功能，为智能路由（例如 A/B 测试、金丝雀部署等）和弹性（超时、重试、熔断器等）提供流量管理功能。它将控制流量行为的高级路由规则转换为特定于 Envoy 的配置，并在运行时将它们传播到 sidecar。Pilot 将服务发现机制抽象为符合 Envoy 数据平面 API 的标准格式，以便支持在多种环境下运行并保持流量管理的相同操作接口。
 * Citadel 通过内置身份和凭证管理提供服务间和最终用户的身份认证。支持基于角色的访问控制、基于服务标识的策略执行等。
 
-![0c8b90bdce4fbdbb9485da7c717fea21.png](evernotecid://481E08E3-B0BC-4AF0-BD1D-F5A91D581CF3/appyinxiangcom/15709100/ENResource/p948)
-
+![avatar](img/istio-service.png)
 在数据平面上，除了 Envoy，还可以选择使用 nginxmesh、linkerd 等作为网络代理。比如，使用 nginxmesh 时，Istio 的控制平面（Pilot、Mixer、Auth）保持不变，但用 Nginx Sidecar 取代 Envoy。
 
 
